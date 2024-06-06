@@ -74,7 +74,7 @@ def Data2CSV(chain):
     scriptDir = Path(__file__).parent.absolute()
     file1 = open(f'{scriptDir}//data//{chain}_swap.txt', 'r')
     lines = file1.readlines()
-    # print(lines)
+    print(f"lines={lines}")
     if len(lines) != 0:
         fileOutputDir = f'{scriptDir}'
         if not os.path.exists(fileOutputDir):
@@ -323,19 +323,22 @@ subgraphURL = config['subgraphURL']
 pool = config['pool']
 
 def main():
-    endTime = int(time.time()) -3600  # current timestamp
-    startTime = endTime - 86400 * 180  # start timestamp, default 180 days
+    endTime = 1666952435# current timestamp
+    startTime = endTime - 100000
+#     startTime = endTime - 86400 * 180  # start timestamp, default 180 days
+    print(f"gk - {endTime}")
     chain = config['chain']
     subgraphURL = config['subgraphURL']
     pool = config['pool']
 
     # get Data
     fetchData(chain, subgraphURL, pool, startTime, endTime)
+    print("data-fetched-gk")
     Data2CSV(chain)
-    fetchAddLiquidity(chain, subgraphURL, pool, startTime, endTime)
-    AddLiquidity2CSV(chain)
-    fetchRemoveLiquidity(chain, subgraphURL, pool, startTime, endTime)
-    RemoveLiquidity2CSV(chain)
+#     fetchAddLiquidity(chain, subgraphURL, pool, startTime, endTime)
+#     AddLiquidity2CSV(chain)
+#     fetchRemoveLiquidity(chain, subgraphURL, pool, startTime, endTime)
+#     RemoveLiquidity2CSV(chain)
 
 
 main()
